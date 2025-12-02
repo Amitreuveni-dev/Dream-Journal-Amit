@@ -2,8 +2,12 @@ import { Request, Response } from "express";
 import { userModel } from "../models/user.model";
 import bcrypt from "bcryptjs";
 import { generateToken, sendTokenCookie, clearAuthCookie } from "../utils/jwt";
-import { clear } from "console";
 
+
+const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
 
 export const register = async (req: Request, res: Response) => {
     try {
@@ -12,6 +16,21 @@ export const register = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Name, email, and password are required" });
         }
 
+        if (!validateEmail(email)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid email format"
+            })
+        }
+
+        if(password.length < 6) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must be at least 6 characters"
+            })
+        }
+
+
         const existing = await userModel.findOne({ email });
         if (existing) {
             return res.status(400).json({
@@ -19,14 +38,15 @@ export const register = async (req: Request, res: Response) => {
                 message: "User already exists"
             });
         }
-
+        
         const hashedPassword = await bcrypt.hash(password, 10);
-
+        
         const user = await userModel.create({
             name,
             email,
             password: hashedPassword
         });
+        
 
         const token = generateToken(user);
         sendTokenCookie(res, token);
@@ -70,6 +90,7 @@ export const login = async (req: Request, res: Response) => {
                 message: "Invalid credentials"
             });
         }
+        console.log("Invalid credentials");
 
         const token = generateToken(user);
         sendTokenCookie(res, token);

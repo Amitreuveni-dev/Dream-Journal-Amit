@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/dataBase';
 import userRoute from "./routes/user.route"
 import path from 'path';
+import cors from "cors";
 
 
 dotenv.config();
@@ -15,6 +16,10 @@ connectDB();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(cookieParser());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 
 app.use((req, _, next) => {
@@ -22,7 +27,7 @@ app.use((req, _, next) => {
   next();
 });
 
-app.use("/api/users", userRoute);
+app.use("/api/user", userRoute);
 
 const PORT = process.env.PORT
 
