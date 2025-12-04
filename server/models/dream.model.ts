@@ -57,4 +57,4 @@ const dreamSchema = new Schema<Dream>({
 }, { timestamps: true });
 
 
-export const DreamModel = model<Dream>("Dream", dreamSchema);
+export const dreamModel = model<Dream>("Dream", dreamSchema);

@@ -11,6 +11,8 @@ const Login = () => {
 
     const { login } = useContext(AuthContext);
 
+    const [ success, setSuccess] = useState("");
+
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -24,11 +26,15 @@ const Login = () => {
         try {
             await login(form.email, form.password);
 
-            navigate("/")
+            setSuccess("Registration successful! Redirecting to login page...");
+
+            setTimeout(() => {
+                navigate("/");
+            }, 2000)
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-            setError(`${error.message}, Invalid credentials`)
+            setError(error.message)
         }
     }
     return (
@@ -36,6 +42,7 @@ const Login = () => {
             <h2 className={styles.title}>Login</h2>
 
             {error && <p className={styles.error}>{error}</p>}
+            {success && <p className={styles.success}>{success}</p>}
 
             <form onSubmit={handleSubmit} className={styles.form}>
 

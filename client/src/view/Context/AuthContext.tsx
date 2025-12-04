@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5174/api";
+axios.defaults.baseURL = "http://localhost:3000/api";
 axios.defaults.withCredentials = true;
 
 interface User {
@@ -48,13 +49,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const login = async (email: string, password: string) => {
-        const res = await axios.post("/user/login", { email, password });
-        setUser(res.data.user);
+        try {
+            const res = await axios.post("/user/login", { email, password });
+            setUser(res.data.user);
+            return res.data;
+        } catch (error: any) {
+            const details = error.response?.data?.message || "Unknown error";
+
+            throw {
+                message: `Login failed, ${details}`,
+                field: error.response?.data?.field || null
+            }
+        }
     };
 
     const register = async (name: string, email: string, password: string) => {
-        const res = await axios.post("/user/register", { name, email, password });
-        setUser(res.data.user);
+        try {
+            const res = await axios.post("/user/register", { name, email, password });
+            return res.data;
+
+        } catch (error: any) {
+            const details = error.response?.data?.message || "Unknown error";
+
+            throw {
+                message: `Registration failed, ${details}`,
+                field: error.response?.data?.field || null
+            }
+        }
     };
 
     const logout = async () => {

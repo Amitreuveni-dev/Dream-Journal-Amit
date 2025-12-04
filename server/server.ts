@@ -2,9 +2,10 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import connectDB from './config/dataBase';
-import userRoute from "./routes/user.route"
 import path from 'path';
 import cors from "cors";
+import userRoute from "./routes/user.route"
+import dreamRoute from "./routes/dream.route"
 
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use((req, _, next) => {
 });
 
 app.use("/api/user", userRoute);
+app.use("/api/dream", dreamRoute);
 
 const PORT = process.env.PORT
 

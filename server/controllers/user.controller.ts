@@ -19,6 +19,7 @@ export const register = async (req: Request, res: Response) => {
         if (!validateEmail(email)) {
             return res.status(400).json({
                 success: false,
+                field: "email",
                 message: "Invalid email format"
             })
         }
@@ -26,6 +27,7 @@ export const register = async (req: Request, res: Response) => {
         if(password.length < 6) {
             return res.status(400).json({
                 success: false,
+                field: "password",
                 message: "Password must be at least 6 characters"
             })
         }
@@ -35,6 +37,7 @@ export const register = async (req: Request, res: Response) => {
         if (existing) {
             return res.status(400).json({
                 success: false,
+                field: "email",
                 message: "User already exists"
             });
         }
@@ -90,7 +93,6 @@ export const login = async (req: Request, res: Response) => {
                 message: "Invalid credentials"
             });
         }
-        console.log("Invalid credentials");
 
         const token = generateToken(user);
         sendTokenCookie(res, token);

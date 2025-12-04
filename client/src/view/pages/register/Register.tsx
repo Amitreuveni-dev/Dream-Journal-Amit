@@ -11,7 +11,8 @@ const Register = () => {
         password: "",
     });
 
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const { register } = useContext(AuthContext);
 
@@ -21,7 +22,7 @@ const Register = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
-    
+
     const validateEmail = (email: string) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
@@ -30,7 +31,7 @@ const Register = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(!validateEmail) {
+        if (!validateEmail) {
             setError("Email is not valid");
             return;
         }
@@ -38,11 +39,15 @@ const Register = () => {
         try {
             await register(form.name, form.email, form.password);
 
-            navigate("/login");
+            setSuccess("Login successful! Redirecting to home page...")
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            setTimeout(() => {
+                navigate("/login");
+            }, 2000)
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-            setError(`${error.message}, Registretion falied`)
+            setError(error.message)
         }
     }
 
@@ -51,6 +56,7 @@ const Register = () => {
             <h2 className={styles.title}>Sign Up</h2>
 
             {error && <p className={styles.error}>{error}</p>}
+            {success && <p className={styles.success}>{success}</p>}
 
 
             <form onSubmit={handleSubmit} className={styles.form}>
