@@ -18,7 +18,10 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setForm({ ...form, [e.target.name]: e.target.value });
+
+        setError("");
+        setSuccess("");
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,7 +29,7 @@ const Login = () => {
         try {
             await login(form.email, form.password);
 
-            setSuccess("Registration successful! Redirecting to login page...");
+            setSuccess("Login successful! Redirecting to login page...");
 
             setTimeout(() => {
                 navigate("/");

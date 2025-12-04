@@ -1,14 +1,13 @@
-import AddDream from "../addDream/AddDream"
+import DreamList from "../../components/DreamList"
 
 const Home = () => {
 
   return (
     <div>
-      <h1>Yes!!!!!!</h1>
-      <p>Success 🤩</p>
-      <button>
-        <AddDream />
-      </button>
+      <h1>Welcome to Dream Journal</h1>
+
+      <h3>Your Dreams!</h3>
+      <DreamList />
     </div>
   )
 }

@@ -42,8 +42,8 @@ export const sendTokenCookie = (res: Response, token: string): void => {
 
   res.cookie('authToken', token, {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: 'strict',
+    secure: false,
+    sameSite: 'lax',
     maxAge: cookieExpireTime,
     path: '/'
   });

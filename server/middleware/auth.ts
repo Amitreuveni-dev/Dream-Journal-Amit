@@ -34,7 +34,6 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
             return;
         }
 
-        // Attach user to request
         req.user = user;
         next();
 

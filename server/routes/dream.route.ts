@@ -5,20 +5,21 @@ import { validateId } from "../middleware/isValidObjectId";
 
 
 const router = express.Router();
+router.use(authenticate);
 
-router.get("/dream", authenticate, dreamController.getAllDreams);
+router.get("/", dreamController.getAllDreams);
 
-router.get("/dream/:id", authenticate, validateId, dreamController.getDreamById);
+router.get("/:id", validateId, dreamController.getDreamById);
 
-router.post("/dream", authenticate, dreamController.createDream);
+router.post("/", dreamController.createDream);
 
-router.put("/dream/:id", authenticate, validateId, dreamController.updateDream);
+router.put("/:id", validateId, dreamController.updateDream);
 
-router.delete("/dream/:id", authenticate, validateId, dreamController.deleteDream);
+router.delete("/:id", validateId, dreamController.deleteDream);
 
-router.put("/dream/:id/favorite", authenticate, validateId, dreamController.toggleFavorite);
+router.put("/:id/favorite", validateId, dreamController.toggleFavorite);
 
-router.get("/favorites", authenticate, dreamController.getFavorites);
+router.get("/favorites", dreamController.getFavorites);
 
 
 export default router;

@@ -16,11 +16,13 @@ const Register = () => {
 
     const { register } = useContext(AuthContext);
 
-
     const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+
+        setError("");
+        setSuccess("");
     }
 
     const validateEmail = (email: string) => {
@@ -39,7 +41,7 @@ const Register = () => {
         try {
             await register(form.name, form.email, form.password);
 
-            setSuccess("Login successful! Redirecting to home page...")
+            setSuccess("Login successful! Redirecting to home page...");
 
             setTimeout(() => {
                 navigate("/login");

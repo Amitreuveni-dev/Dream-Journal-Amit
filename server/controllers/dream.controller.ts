@@ -3,7 +3,6 @@ import { dreamModel } from "../models/dream.model";
 
 export const getAllDreams = async (req: Request, res: Response) => {
     try {
-
         const userId = req.user!._id;
 
         const dreams = await dreamModel.find({ userId }).sort({ date: -1 });
@@ -24,7 +23,6 @@ export const getAllDreams = async (req: Request, res: Response) => {
 export const getDreamById = async (req: Request, res: Response) => {
     try {
 
-
         const dreamId = req.params.id;
 
         const dream = await dreamModel.findOne({
@@ -44,7 +42,6 @@ export const getDreamById = async (req: Request, res: Response) => {
             dream,
         })
 
-
     } catch (error) {
         return res.status(500).json({
             success: false,
@@ -56,11 +53,10 @@ export const getDreamById = async (req: Request, res: Response) => {
 export const createDream = async (req: Request, res: Response) => {
     try {
 
-
         const { title, content, date, clarity, mood, tags, isFavorite } = req.body;
 
         if (!title || !content) {
-            return res.status(404).json
+            return res.status(400).json
                 ({
                     success: false,
                     message: "Title and content are required",
@@ -179,7 +175,6 @@ export const toggleFavorite = async (req: Request, res: Response) => {
             dream,
         });
 
-
     } catch (error) {
         return res.status(500).json({
             success: false,
@@ -197,12 +192,7 @@ export const getFavorites = async (req: Request, res: Response) => {
             isFavorite: true,
         }).sort({ date: -1 })
 
-        if(!favorites) {
-            return res.status(404).json({
-                success: false,
-                message: "Dream not found",
-            });
-        }
+        
         return res.status(200).json({
             success: true,
             favorites,
