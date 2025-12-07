@@ -35,6 +35,7 @@ Dream-Journal-Amit/
 Clone the repository:
 
 git clone https://github.com/Amitreuveni-dev/Dream-Journal-Amit.git
+
 cd Dream-Journal-Amit
 
 Install dependencies (client + server):
