@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDreams } from "../services/dreamService";
 import type { Dream } from "../../types/Dream";
-import DreamCard from "./DreamCard";
+import DreamCard from "../components/DreamCard";
 import styles from "./DreamList.module.scss";
 
 const DreamList = () => {
@@ -23,11 +23,11 @@ const DreamList = () => {
         load();
     }, []);
 
-    if (loading) return <p>Loading dreams...</p>;
-    if (dreams.length === 0) return <p>No dreams found.</p>;
+    if (loading) return <p className={styles.message}>Loading dreams...</p>;
+    if (dreams.length === 0) return <p className={styles.message}>No dreams found.</p>;
 
     return (
-        <div className={styles.list}>
+        <div className={styles.grid}>
             {dreams.map((dream) => (
                 <DreamCard key={dream._id} dream={dream} />
             ))}
