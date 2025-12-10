@@ -11,6 +11,7 @@ interface DreamFormProps {
 const DreamForm = ({ initialData, onSubmit }: DreamFormProps) => {
     const [dream, setDream] = useState<DreamFormData>(initialData);
 
+
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {

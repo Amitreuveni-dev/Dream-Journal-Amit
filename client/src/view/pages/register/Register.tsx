@@ -68,6 +68,7 @@ const Register = () => {
                 <input type="password" name="password" placeholder="0123456789" className={styles.input} value={form.password} onChange={handleChange} required />
                 <button type="submit" className={styles.submitButton}>Create Account</button>
                 <p>Have an account click here to Login</p>
+                <p>⬇️⬇️⬇️</p>
                 <button className={styles.signInButton} onClick={() => navigate("/login")}>Sign in</button>
             </form>
         </div>

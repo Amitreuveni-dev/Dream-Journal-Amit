@@ -11,7 +11,7 @@ const Login = () => {
 
     const { login } = useContext(AuthContext);
 
-    const [ success, setSuccess] = useState("");
+    const [success, setSuccess] = useState("");
 
     const [error, setError] = useState("");
 
@@ -52,8 +52,9 @@ const Login = () => {
                 <input type="text" name="email" placeholder="example123@gmail.com" className={styles.input} value={form.email} onChange={handleChange} required autoFocus />
                 <input type="password" name="password" placeholder="123456789" className={styles.input} value={form.password} onChange={handleChange} required />
                 <button type="submit" className={styles.submitButton}>Sign In</button>
-                <p>Don't have an account yet</p>
+                <p>Don't have an account yet,</p>
                 <p>Click here to Sign Up</p>
+                <p>⬇️⬇️⬇️</p>
                 <button className={styles.signUpButton} onClick={() => navigate("/register")}>Sign Up</button>
             </form>
         </div>

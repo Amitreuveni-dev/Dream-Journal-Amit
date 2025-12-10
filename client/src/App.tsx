@@ -4,9 +4,9 @@ import Home from "./view/pages/home/Home";
 import ProtectedRoute from "./view/components/ProtectedRoute";
 import Login from "./view/pages/login/Login";
 import Register from "./view/pages/register/Register";
-
 import "./index.css";
 import AddDream from "./view/pages/addDream/AddDream";
+import MainLayout from "./view/layout/MainLayout";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -17,21 +17,29 @@ function App() {
 
   return (
     <Routes>
+
       <Route
         path="/"
-        element=
-        {
+        element={
           <ProtectedRoute>
-            <Home darkMode={darkMode} setDarkMode={setDarkMode} />
+            <MainLayout darkMode={darkMode} setDarkMode={setDarkMode}>
+              <Home />
+            </MainLayout>
           </ProtectedRoute>
         }
       />
-      <Route path="add-dream" element=
-        {
+
+      <Route
+        path="/add-dream"
+        element={
           <ProtectedRoute>
-            <AddDream />
+            <MainLayout darkMode={darkMode} setDarkMode={setDarkMode}>
+              <AddDream />
+            </MainLayout>
           </ProtectedRoute>
-        } />
+        }
+      />
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>

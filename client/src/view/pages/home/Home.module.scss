@@ -1,88 +1,12 @@
 .page {
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 1.5rem 3rem;
-  background: var(--nav-bg);
-  box-shadow: 0 2px 10px var(--card-shadow);
-}
-
-.leftSection {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
-.avatar {
-  width: 42px;
-  height: 42px;
-  background: #d9d9d9;
-  border-radius: 50%;
-}
-
-.hello {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-.username {
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 1rem;
 }
 
 .title {
   text-align: center;
-  font-size: 1.8rem;
 }
 
-.rightSection {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-}
-
-.themeSwitch {
-  background: transparent;
-  border: 1px solid var(--text);
-  color: var(--text);
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: 0.2s;
-}
-
-.themeSwitch:hover {
-  opacity: 0.7;
-}
-
-.addBtn {
-  background: var(--accent);
-  color: white;
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
-  transition: 0.2s;
-}
-
-.addBtn:hover {
-  background: var(--accent-hover);
-}
-
-.content {
-  max-width: 1100px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.content h2 {
+h2 {
+  font-size: 1.6rem;
   margin-bottom: 1rem;
-  font-size: 1.4rem;
 }

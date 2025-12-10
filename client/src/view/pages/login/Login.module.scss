@@ -6,19 +6,16 @@
     box-sizing: border-box;
 }
 
-body {
-    background: linear-gradient(135deg, #8576fa, #9351f5);
-}
-
 .container {
     width: 100%;
-    border-radius: 1rem;
+    min-height: 100vh;
     background: linear-gradient(135deg, #6c5ce7, #a66cff);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 1rem;
+    text-align: center;
 }
 
 .form {
