@@ -42,15 +42,6 @@ const MainLayout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
           >
             {darkMode ? "🌙 Dark" : "☀ Light"}
           </button>
-          <button className={styles.logOutBtn} onClick={async () => {
-            try {
-              await authService.logout();
-            } catch (error: any) {
-              console.error("Server logout failed — but proceeding anyway");
-            }
-            dispatch(logout());
-            navigate("/login")
-          }}>LogOut</button>
 
           {!isAddDreamPage ? (
             <button
@@ -67,6 +58,15 @@ const MainLayout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
               🏠 Home
             </button>
           )}
+          <button className={styles.logOutBtn} onClick={async () => {
+            try {
+              await authService.logout();
+            } catch (error: any) {
+              console.error("Server logout failed — but proceeding anyway");
+            }
+            dispatch(logout());
+            navigate("/login")
+          }}>LogOut</button>
         </div>
       </header>
 
