@@ -1,7 +1,10 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router"
-import { AuthContext } from "../../Context/AuthContext";
 import styles from "./Register.module.scss";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../redux/store";
+import { authService } from "../../services/authService";
+import { registerSuccess } from "../../redux/slices/authSlice";
 
 
 const Register = () => {
@@ -11,11 +14,11 @@ const Register = () => {
         password: "",
     });
 
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const { register } = useContext(AuthContext);
-
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,15 +36,17 @@ const Register = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (!validateEmail) {
+        if (!validateEmail(form.email)) {
             setError("Email is not valid");
             return;
         }
 
         try {
-            await register(form.name, form.email, form.password);
+            const res = await authService.register(form.name, form.email, form.password);
 
-            setSuccess("Login successful! Redirecting to home page...");
+            dispatch(registerSuccess(res.user))
+
+            setSuccess("Registration successeful! Redirecting to login...");
 
             setTimeout(() => {
                 navigate("/login");
@@ -67,7 +72,7 @@ const Register = () => {
                 <input type="text" name="email" placeholder="example@gmail.com" className={styles.input} value={form.email} onChange={handleChange} required />
                 <input type="password" name="password" placeholder="0123456789" className={styles.input} value={form.password} onChange={handleChange} required />
                 <button type="submit" className={styles.submitButton}>Create Account</button>
-                <p>Have an account click here to Login</p>
+                <p>Have an account? Click below</p>
                 <p>⬇️⬇️⬇️</p>
                 <button className={styles.signInButton} onClick={() => navigate("/login")}>Sign in</button>
             </form>

@@ -1,20 +1,17 @@
-import { useContext, type PropsWithChildren } from "react";
 import { Navigate } from "react-router";
-import { AuthContext } from "../Context/AuthContext";
+import type { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 
-const ProtectedRoute = ({ children }: PropsWithChildren) => {
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
-    const { user, loading } = useContext(AuthContext)
+    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
-    if (loading) {
-        return<div>Loading...</div>
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
     }
-    if(!user) {
-        return <Navigate to="/login" replace />
-    }
+
     return children;
-  
-}
+};
 
 export default ProtectedRoute

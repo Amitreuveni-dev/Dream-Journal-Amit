@@ -27,7 +27,7 @@ const DreamList = () => {
     if (dreams.length === 0) return <p className={styles.message}>No dreams found.</p>;
 
     return (
-        <div className={styles.grid}>
+        <div className={styles.list}>
             {dreams.map((dream) => (
                 <DreamCard key={dream._id} dream={dream} />
             ))}

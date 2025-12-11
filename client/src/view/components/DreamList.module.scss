@@ -1,7 +1,11 @@
 .list {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem 2.5rem;
-    justify-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.8rem;
+
+    padding: 1rem 0;
 }

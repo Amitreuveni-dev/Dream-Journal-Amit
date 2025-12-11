@@ -1,15 +1,18 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../../Context/AuthContext";
 import styles from "./Login.module.scss"
-const Login = () => {
+import { loginSuccess } from "../../redux/slices/authSlice";
+import type { AppDispatch } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { authService } from "../../services/authService";
 
+const Login = () => {
     const [form, setForm] = useState({
         email: "",
         password: "",
     });
 
-    const { login } = useContext(AuthContext);
+    const dispatch = useDispatch<AppDispatch>();
 
     const [success, setSuccess] = useState("");
 
@@ -27,9 +30,11 @@ const Login = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await login(form.email, form.password);
+            const res = await authService.login(form.email, form.password);
 
-            setSuccess("Login successful! Redirecting to login page...");
+            dispatch(loginSuccess(res.user));
+
+            setSuccess("Login successful! Redirecting...");
 
             setTimeout(() => {
                 navigate("/");

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "./view/pages/home/Home";
 import ProtectedRoute from "./view/components/ProtectedRoute";
 import Login from "./view/pages/login/Login";
@@ -16,33 +16,31 @@ function App() {
   }, [darkMode]);
 
   return (
-    <Routes>
+    <BrowserRouter>
+      <Routes>
 
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <MainLayout darkMode={darkMode} setDarkMode={setDarkMode}>
-              <Home />
-            </MainLayout>
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/add-dream"
-        element={
-          <ProtectedRoute>
-            <MainLayout darkMode={darkMode} setDarkMode={setDarkMode}>
-              <AddDream />
-            </MainLayout>
-          </ProtectedRoute>
-        }
-      />
-
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
+        <Route path="/" element=
+          {
+            <ProtectedRoute>
+              <MainLayout darkMode={darkMode} setDarkMode={setDarkMode}>
+                <Home />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/add-dream" element=
+          {
+            <ProtectedRoute>
+              <MainLayout darkMode={darkMode} setDarkMode={setDarkMode}>
+                <AddDream />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

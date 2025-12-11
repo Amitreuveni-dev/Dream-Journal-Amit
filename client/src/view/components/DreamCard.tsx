@@ -7,13 +7,9 @@ const DreamCard = ({ dream }: { dream: Dream }) => {
 
     return (
         <div className={styles.card}>
-
             <div className={styles.header}>
                 <h3 className={styles.title}>{dream.title}</h3>
-
-                {dream.isFavorite && <span className={styles.star}>★</span>}
             </div>
-
             <p className={styles.date}>
                 {new Date(dream.date).toLocaleDateString()}
             </p>
