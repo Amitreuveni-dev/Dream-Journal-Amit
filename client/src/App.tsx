@@ -7,9 +7,29 @@ import Register from "./view/pages/register/Register";
 import "./index.css";
 import AddDream from "./view/pages/addDream/AddDream";
 import MainLayout from "./view/layout/MainLayout";
+import { authService } from "./view/services/authService";
+import { useDispatch } from "react-redux";
+import { loginSuccess, logout } from "./view/redux/slices/authSlice";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await authService.getCurrentUser();
+
+      if (user) {
+        dispatch(loginSuccess(user));
+      } else {
+        dispatch(logout());
+      }
+    };
+
+    checkUser();
+  }, [dispatch]);
+
 
   useEffect(() => {
     document.body.className = darkMode ? "dark-theme" : "light-theme";

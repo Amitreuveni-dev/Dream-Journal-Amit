@@ -23,6 +23,15 @@ export const authService = {
     }
   },
 
+  getCurrentUser: async () => {
+    try {
+      const res = await api.get("/user/me");
+      return res.data.user;
+    } catch (error) {
+      return null;
+    }
+  },
+
   logout: async () => {
     try {
       const res = await api.post("/user/logout");

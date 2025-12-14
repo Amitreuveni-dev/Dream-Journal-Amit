@@ -65,7 +65,6 @@ const MainLayout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
               console.error("Server logout failed — but proceeding anyway");
             }
             dispatch(logout());
-            navigate("/login")
           }}>LogOut</button>
         </div>
       </header>
