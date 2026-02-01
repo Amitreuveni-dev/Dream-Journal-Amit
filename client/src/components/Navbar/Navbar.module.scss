@@ -1,0 +1,110 @@
+@use '../../styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: all 0.3s ease;
+
+  &.scrolled {
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.logoIcon {
+  font-size: 28px;
+}
+
+.logoText {
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+
+  @include respond-to(md) {
+    display: none;
+  }
+}
+
+.navLink {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loginBtn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  @include respond-to(sm) {
+    display: none;
+  }
+}
+
+.signupBtn {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 8px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+  }
+}
