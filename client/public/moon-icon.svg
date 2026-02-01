@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="moonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#a5b4fc;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer glow -->
+  <circle cx="32" cy="32" r="30" fill="url(#glowGradient)" opacity="0.3"/>
+
+  <!-- Main moon crescent -->
+  <path
+    d="M32 4C16.536 4 4 16.536 4 32s12.536 28 28 28c5.892 0 11.362-1.82 15.878-4.932C41.536 51.296 37.5 42.408 37.5 32.5c0-9.908 4.036-18.796 10.378-22.568C43.362 5.82 37.892 4 32 4z"
+    fill="url(#moonGradient)"
+  />
+
+  <!-- Stars -->
+  <circle cx="50" cy="14" r="1.5" fill="#fef3c7"/>
+  <circle cx="56" cy="24" r="1" fill="#fef3c7"/>
+  <circle cx="52" cy="44" r="1.2" fill="#fef3c7"/>
+  <circle cx="46" cy="52" r="0.8" fill="#fef3c7"/>
+</svg>
