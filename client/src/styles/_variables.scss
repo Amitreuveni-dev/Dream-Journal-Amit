@@ -1,0 +1,124 @@
+// ===========================================
+// NightLog Design System Variables
+// ===========================================
+
+// Dark Mode Colors (Default)
+$dark-bg-primary: #0a0a0f;
+$dark-bg-secondary: #12121a;
+$dark-bg-glass: rgba(255, 255, 255, 0.05);
+$dark-accent-primary: #6366f1;
+$dark-accent-secondary: #8b5cf6;
+$dark-text-primary: #f8fafc;
+$dark-text-secondary: #94a3b8;
+$dark-border-color: rgba(255, 255, 255, 0.1);
+$dark-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+// Light Mode Colors
+$light-bg-primary: #f8fafc;
+$light-bg-secondary: #ffffff;
+$light-bg-glass: rgba(0, 0, 0, 0.02);
+$light-accent-primary: #4f46e5;
+$light-accent-secondary: #7c3aed;
+$light-text-primary: #1e293b;
+$light-text-secondary: #64748b;
+$light-border-color: rgba(0, 0, 0, 0.1);
+$light-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+
+// Status Colors
+$success: #22c55e;
+$warning: #f59e0b;
+$error: #ef4444;
+$info: #3b82f6;
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: $breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == 2xl {
+    @media (max-width: $breakpoint-2xl) { @content; }
+  }
+}
+
+@mixin glass-effect {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+}
+
+@mixin gradient-text {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin hover-lift {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+}
+
+// Animation keyframes
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
