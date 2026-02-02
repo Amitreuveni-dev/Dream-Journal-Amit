@@ -38,6 +38,46 @@ NightLog is a full-stack dream journaling application that combines the power of
 
 ---
 
+## 📋 Development Progress
+
+### Server (Backend)
+- [x] Project setup with TypeScript & Express
+- [x] Database configuration (MongoDB/Mongoose)
+- [x] User model with password hashing
+- [x] Dream model with TTL index for trash
+- [x] Authentication system (register/login/logout)
+- [x] JWT middleware & protected routes
+- [x] Dream CRUD routes with soft delete
+- [ ] AI analysis integration
+- [ ] Email service (Nodemailer)
+- [ ] Cloudinary avatar upload
+- [ ] Insights/statistics endpoints
+
+### Client (Frontend)
+- [x] Project setup with Vite & TypeScript
+- [x] Redux Toolkit & RTK Query configuration
+- [x] Global styles & SCSS variables
+- [x] Zod validation schemas
+- [x] Error Boundary component
+- [x] Landing page with animations
+- [x] Navbar component
+- [x] Authentication pages (Login/Register)
+- [x] Protected route wrapper
+- [x] Auth API service & Redux slice
+- [x] Dreams API service
+- [x] Dashboard page
+- [x] DreamList component with filtering
+- [x] DreamCard component
+- [x] DreamForm component (create/edit)
+- [x] DreamDetail modal
+- [ ] Trash page
+- [ ] Dark/Light mode toggle
+- [ ] User profile page
+- [ ] Insights dashboard with charts
+- [ ] Skeleton loaders
+
+---
+
 ## 🛠️ Tech Stack
 
 ### Frontend
