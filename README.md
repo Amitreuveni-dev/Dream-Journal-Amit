@@ -72,7 +72,7 @@ NightLog is a full-stack dream journaling application that combines the power of
 - [x] DreamDetail modal
 - [x] Trash page
 - [x] Dark/Light mode toggle
-- [ ] User profile page
+- [x] User profile page
 - [ ] Insights dashboard with charts
 - [ ] Skeleton loaders
 
