@@ -6,6 +6,54 @@ NightLog is a full-stack dream journaling application that combines the power of
 
 ---
 
+## 📊 Development Progress
+
+### ✅ Completed Features
+
+| Feature | Status | Branch |
+|---------|--------|--------|
+| Project Setup (Client + Server) | ✅ Done | `main` |
+| Landing Page | ✅ Done | `main` |
+| Auth Backend (JWT + Cookies) | ✅ Done | `main` |
+| Auth Pages (Login/Register) | ✅ Done | `feature/auth-pages` |
+| Dashboard (List, Search, Filters) | ✅ Done | `feature/auth-pages` |
+| Dream Editor (Create/Edit) | ✅ Done | `feature/auth-pages` |
+
+### 🔄 Pending Features
+
+| Feature | Status |
+|---------|--------|
+| Dream Routes (Backend) | ⏳ Pending |
+| AI Analysis Integration | ⏳ Pending |
+| Insights Dashboard (Charts) | ⏳ Pending |
+| Trash/Restore System | ⏳ Pending |
+| Profile Settings | ⏳ Pending |
+
+### 📁 Files Created This Session
+
+**Auth Pages:**
+- `client/src/pages/Auth/Login.tsx`
+- `client/src/pages/Auth/Register.tsx`
+- `client/src/pages/Auth/Auth.module.scss`
+- `client/src/validation/authValidation.ts`
+- `client/src/redux/api/authApi.ts`
+- `client/src/redux/slices/authSlice.ts`
+
+**Dashboard:**
+- `client/src/pages/Dashboard/Dashboard.tsx`
+- `client/src/pages/Dashboard/Dashboard.module.scss`
+- `client/src/components/DreamCard/DreamCard.tsx`
+- `client/src/components/DreamCard/DreamCard.module.scss`
+- `client/src/redux/api/dreamsApi.ts`
+- `client/src/redux/slices/dreamsSlice.ts`
+
+**Dream Editor:**
+- `client/src/pages/DreamEditor/DreamEditor.tsx`
+- `client/src/pages/DreamEditor/DreamEditor.module.scss`
+- `client/src/validation/dreamValidation.ts`
+
+---
+
 ## ✨ Features
 
 ### Core Functionality
@@ -314,6 +362,8 @@ This project follows a strict branching strategy:
 3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+> **Note:** Only run `npm run build` when deploying to production. For development, use `npm run dev` instead.
 
 ---
 
