@@ -80,7 +80,12 @@ export default function Dashboard() {
           <span className={styles.logoText}>NightLog</span>
         </div>
         <div className={styles.userSection}>
-          <span className={styles.greeting}>Hello, {user?.username}</span>
+          <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
+            <span className={styles.avatar}>
+              {user?.username?.charAt(0).toUpperCase()}
+            </span>
+            <span className={styles.greeting}>{user?.username}</span>
+          </button>
           <ThemeToggle />
           <button className={styles.trashBtn} onClick={() => navigate('/trash')}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

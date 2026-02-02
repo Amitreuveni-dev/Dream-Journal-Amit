@@ -42,13 +42,48 @@
   gap: 16px;
 }
 
-.greeting {
-  font-size: 14px;
-  color: var(--text-secondary);
+.profileBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px 6px 6px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.1);
+  }
 
   @include respond-to(sm) {
-    display: none;
+    padding: 4px;
+
+    .greeting {
+      display: none;
+    }
   }
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+
+.greeting {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 .trashBtn {

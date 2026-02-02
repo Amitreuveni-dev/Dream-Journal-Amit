@@ -28,3 +28,16 @@ export type {
   UpdateDreamRequest,
   DreamsQueryParams,
 } from './dreamsApi';
+
+export {
+  userApi,
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useChangePasswordMutation,
+  useDeleteAccountMutation,
+} from './userApi';
+export type {
+  UpdateProfileRequest,
+  ChangePasswordRequest,
+  UserResponse,
+} from './userApi';
