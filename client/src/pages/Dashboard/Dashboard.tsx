@@ -7,6 +7,7 @@ import { useLogoutMutation, useDeleteDreamMutation, Dream } from '../../services
 import DreamList from '../../components/DreamList';
 import DreamForm from '../../components/DreamForm';
 import DreamDetail from '../../components/DreamDetail';
+import ThemeToggle from '../../components/ThemeToggle';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
@@ -80,6 +81,14 @@ export default function Dashboard() {
         </div>
         <div className={styles.userSection}>
           <span className={styles.greeting}>Hello, {user?.username}</span>
+          <ThemeToggle />
+          <button className={styles.trashBtn} onClick={() => navigate('/trash')}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            </svg>
+            Trash
+          </button>
           <button
             className={styles.logoutBtn}
             onClick={handleLogout}

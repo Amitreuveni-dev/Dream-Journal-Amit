@@ -51,6 +51,40 @@
   }
 }
 
+.trashBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  @include respond-to(sm) {
+    padding: 8px;
+
+    span, svg + :not(svg) {
+      display: none;
+    }
+  }
+}
+
 .logoutBtn {
   padding: 8px 16px;
   font-size: 14px;
