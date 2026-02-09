@@ -87,6 +87,13 @@ export default function Dashboard() {
             <span className={styles.greeting}>{user?.username}</span>
           </button>
           <ThemeToggle />
+          <button className={styles.insightsBtn} onClick={() => navigate('/insights')}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M3 3v18h18" />
+              <path d="M18 9l-5 5-4-4-6 6" />
+            </svg>
+            Insights
+          </button>
           <button className={styles.trashBtn} onClick={() => navigate('/trash')}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="3 6 5 6 21 6" />

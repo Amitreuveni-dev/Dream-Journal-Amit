@@ -41,3 +41,21 @@ export type {
   ChangePasswordRequest,
   UserResponse,
 } from './userApi';
+
+export {
+  insightsApi,
+  useGetInsightsStatsQuery,
+  useGetMoodDistributionQuery,
+  useGetSymbolFrequencyQuery,
+} from './insightsApi';
+export type {
+  InsightsQueryParams,
+  InsightsStats,
+  StatsResponse,
+  MoodData,
+  DreamTimeData,
+  MoodsResponse,
+  TagData,
+  SymbolData,
+  SymbolsResponse,
+} from './insightsApi';
