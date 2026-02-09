@@ -10,6 +10,7 @@ import {
 } from '../../services';
 import DreamDetail from '../../components/DreamDetail';
 import ThemeToggle from '../../components/ThemeToggle';
+import { TrashCardSkeleton } from '../../components/Skeleton';
 import styles from './Trash.module.scss';
 
 const moodEmojis: Record<string, string> = {
@@ -134,7 +135,7 @@ export default function Trash() {
         {isLoading ? (
           <div className={styles.grid}>
             {[...Array(6)].map((_, i) => (
-              <div key={i} className={styles.skeleton} />
+              <TrashCardSkeleton key={i} />
             ))}
           </div>
         ) : trashedDreams.length === 0 ? (

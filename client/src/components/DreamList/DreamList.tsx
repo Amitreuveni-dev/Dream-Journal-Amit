@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Dream, DreamsQueryParams, useGetDreamsQuery } from '../../services';
 import { moodOptions, MoodType } from '../../validation/dreamSchemas';
 import DreamCard from '../DreamCard';
+import { DreamCardSkeleton } from '../Skeleton';
 import styles from './DreamList.module.scss';
 
 interface DreamListProps {
@@ -215,7 +216,7 @@ export default function DreamList({ onEdit, onDelete, onView, onCreateNew }: Dre
       {isLoading ? (
         <div className={styles.loadingGrid}>
           {[...Array(6)].map((_, i) => (
-            <div key={i} className={styles.skeleton} />
+            <DreamCardSkeleton key={i} />
           ))}
         </div>
       ) : data?.dreams.length === 0 ? (

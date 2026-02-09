@@ -1,0 +1,308 @@
+@use '../../styles/variables' as *;
+
+// Base skeleton shimmer animation
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Base skeleton styles
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-glass) 25%,
+    var(--bg-secondary) 50%,
+    var(--bg-glass) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+// Skeleton variants
+.text {
+  height: 14px;
+  width: 100%;
+}
+
+.textSm {
+  height: 12px;
+  width: 100%;
+}
+
+.textLg {
+  height: 18px;
+  width: 100%;
+}
+
+.title {
+  height: 24px;
+  width: 70%;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.button {
+  height: 40px;
+  border-radius: 10px;
+}
+
+.badge {
+  height: 24px;
+  width: 60px;
+  border-radius: 100px;
+}
+
+// Dream Card Skeleton
+.dreamCard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  min-height: 220px;
+}
+
+.dreamCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dreamCardMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dreamCardTitle {
+  height: 22px;
+  width: 75%;
+  margin-bottom: 12px;
+}
+
+.dreamCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.dreamCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dreamCardTags {
+  display: flex;
+  gap: 6px;
+}
+
+.dreamCardTag {
+  height: 26px;
+  width: 60px;
+  border-radius: 6px;
+}
+
+.dreamCardIndicators {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// Stat Card Skeleton
+.statCard {
+  @include glass-effect;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.statValue {
+  height: 32px;
+  width: 60px;
+}
+
+.statLabel {
+  height: 14px;
+  width: 100px;
+}
+
+// Chart Card Skeleton
+.chartCard {
+  @include glass-effect;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.chartTitle {
+  height: 22px;
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.chartArea {
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  gap: 16px;
+}
+
+.chartBar {
+  border-radius: 4px;
+}
+
+// Profile Section Skeleton
+.profileSection {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.profileSectionTitle {
+  height: 22px;
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.profileAvatar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.profileAvatarCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.profileAvatarInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profileInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.profileLabel {
+  height: 14px;
+  width: 80px;
+}
+
+.profileInput {
+  height: 46px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.profileTextarea {
+  height: 100px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.profileButton {
+  height: 44px;
+  width: 140px;
+  border-radius: 10px;
+}
+
+// Preference Item Skeleton
+.preferenceItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.preferenceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.preferenceTitle {
+  height: 16px;
+  width: 120px;
+}
+
+.preferenceDesc {
+  height: 13px;
+  width: 200px;
+}
+
+.preferenceToggle {
+  width: 48px;
+  height: 26px;
+  border-radius: 26px;
+}
+
+// Trash Card Skeleton (similar to dream card but with actions)
+.trashCard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  min-height: 280px;
+}
+
+.trashCardActions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.trashCardAction {
+  flex: 1;
+  height: 38px;
+  border-radius: 8px;
+}
