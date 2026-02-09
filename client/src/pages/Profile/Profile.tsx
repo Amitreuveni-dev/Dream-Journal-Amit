@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -8,11 +8,17 @@ import toast from 'react-hot-toast';
 import { useAppSelector } from '../../redux/store';
 import {
   useUpdateProfileMutation,
+  useUploadAvatarMutation,
   useChangePasswordMutation,
   useDeleteAccountMutation,
 } from '../../services';
 import { useTheme } from '../../contexts/ThemeContext';
 import ThemeToggle from '../../components/ThemeToggle';
+import {
+  ProfileSectionSkeleton,
+  PreferencesSectionSkeleton,
+  SecuritySectionSkeleton,
+} from '../../components/Skeleton';
 import styles from './Profile.module.scss';
 
 const profileSchema = z.object({
@@ -50,9 +56,11 @@ export default function Profile() {
   const { theme, setTheme } = useTheme();
 
   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
+  const [uploadAvatar, { isLoading: isUploadingAvatar }] = useUploadAvatarMutation();
   const [changePassword, { isLoading: isChangingPassword }] = useChangePasswordMutation();
   const [deleteAccount, { isLoading: isDeleting }] = useDeleteAccountMutation();
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
@@ -127,6 +135,44 @@ export default function Profile() {
     }
   };
 
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error('Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast.error('File too large. Maximum size is 5MB');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('avatar', file);
+      await uploadAvatar(formData).unwrap();
+      toast.success('Avatar uploaded successfully');
+    } catch (error: unknown) {
+      const err = error as { data?: { message?: string } };
+      toast.error(err.data?.message || 'Failed to upload avatar');
+    }
+
+    // Reset input so same file can be selected again
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   return (
     <motion.div
       className={styles.profile}
@@ -147,21 +193,59 @@ export default function Profile() {
       </header>
 
       <main className={styles.main}>
+        {!user ? (
+          <div className={styles.content}>
+            <ProfileSectionSkeleton />
+            <PreferencesSectionSkeleton />
+            <SecuritySectionSkeleton />
+          </div>
+        ) : (
         <div className={styles.content}>
           {/* Profile Info Section */}
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Profile Information</h2>
             <form onSubmit={handleProfileSubmit(onProfileSubmit)} className={styles.form}>
               <div className={styles.avatarSection}>
-                <div className={styles.avatar}>
-                  {user?.avatar ? (
+                <div
+                  className={`${styles.avatar} ${styles.avatarClickable}`}
+                  onClick={handleAvatarClick}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAvatarClick()}
+                >
+                  {isUploadingAvatar ? (
+                    <div className={styles.avatarLoading}>
+                      <div className={styles.spinner} />
+                    </div>
+                  ) : user?.avatar ? (
                     <img src={user.avatar} alt={user.username} />
                   ) : (
                     <span>{user?.username?.charAt(0).toUpperCase()}</span>
                   )}
+                  <div className={styles.avatarOverlay}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                      <circle cx="12" cy="13" r="4" />
+                    </svg>
+                  </div>
                 </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  onChange={handleAvatarChange}
+                  className={styles.hiddenInput}
+                />
                 <div className={styles.avatarInfo}>
-                  <p className={styles.avatarHint}>Avatar upload coming soon</p>
+                  <button
+                    type="button"
+                    className={styles.uploadBtn}
+                    onClick={handleAvatarClick}
+                    disabled={isUploadingAvatar}
+                  >
+                    {isUploadingAvatar ? 'Uploading...' : 'Change Avatar'}
+                  </button>
+                  <p className={styles.avatarHint}>JPEG, PNG, WebP or GIF. Max 5MB.</p>
                 </div>
               </div>
 
@@ -379,6 +463,7 @@ export default function Profile() {
             )}
           </section>
         </div>
+        )}
       </main>
     </motion.div>
   );

@@ -4,7 +4,7 @@ export interface User {
   _id: string;
   username: string;
   email: string;
-  avatarUrl?: string;
+  avatar?: string;
   bio?: string;
   preferences: {
     theme: 'dark' | 'light';

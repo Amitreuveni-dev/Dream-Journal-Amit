@@ -39,6 +39,15 @@ export const userApi = api.injectEndpoints({
       invalidatesTags: ['User'],
     }),
 
+    uploadAvatar: builder.mutation<UserResponse, FormData>({
+      query: (formData) => ({
+        url: '/users/avatar',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
     changePassword: builder.mutation<{ success: boolean; message: string }, ChangePasswordRequest>({
       query: (data) => ({
         url: '/users/password',
@@ -60,6 +69,7 @@ export const userApi = api.injectEndpoints({
 export const {
   useGetProfileQuery,
   useUpdateProfileMutation,
+  useUploadAvatarMutation,
   useChangePasswordMutation,
   useDeleteAccountMutation,
 } = userApi;

@@ -33,6 +33,7 @@ export {
   userApi,
   useGetProfileQuery,
   useUpdateProfileMutation,
+  useUploadAvatarMutation,
   useChangePasswordMutation,
   useDeleteAccountMutation,
 } from './userApi';
