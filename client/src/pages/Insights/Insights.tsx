@@ -23,6 +23,7 @@ import {
   InsightsQueryParams,
 } from '../../services';
 import ThemeToggle from '../../components/ThemeToggle';
+import { StatCardSkeleton, ChartCardSkeleton } from '../../components/Skeleton';
 import styles from './Insights.module.scss';
 
 type Period = '7d' | '30d' | '90d' | '1y' | 'all';
@@ -105,10 +106,21 @@ export default function Insights() {
 
       <main className={styles.main}>
         {isLoading ? (
-          <div className={styles.loading}>
-            <div className={styles.spinner} />
-            <span>Loading insights...</span>
-          </div>
+          <>
+            {/* Stats Cards Skeleton */}
+            <section className={styles.statsGrid}>
+              {[...Array(4)].map((_, i) => (
+                <StatCardSkeleton key={i} />
+              ))}
+            </section>
+
+            {/* Charts Skeleton */}
+            <div className={styles.chartsGrid}>
+              {[...Array(4)].map((_, i) => (
+                <ChartCardSkeleton key={i} />
+              ))}
+            </div>
+          </>
         ) : (
           <>
             {/* Stats Cards */}
