@@ -6,8 +6,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 120px 24px 80px;
+  height: 100vh;
+  min-height: 600px;
+  max-height: 100vh;
+  padding: clamp(80px, 10vh, 120px) 24px clamp(60px, 8vh, 80px);
   overflow: hidden;
 }
 
@@ -74,7 +76,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  margin-bottom: 24px;
+  margin-bottom: clamp(12px, 2vh, 24px);
   font-size: 13px;
   font-weight: 500;
   color: var(--accent-primary);
@@ -88,11 +90,11 @@
 }
 
 .title {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.1;
   color: var(--text-primary);
-  margin-bottom: 24px;
+  margin-bottom: clamp(12px, 2vh, 24px);
   letter-spacing: -0.02em;
 }
 
@@ -104,18 +106,18 @@
 }
 
 .subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
   line-height: 1.6;
   color: var(--text-secondary);
   max-width: 600px;
-  margin-bottom: 40px;
+  margin-bottom: clamp(24px, 4vh, 40px);
 }
 
 .ctaButtons {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 60px;
+  margin-bottom: clamp(32px, 5vh, 60px);
 
   @include respond-to(sm) {
     flex-direction: column;
@@ -127,8 +129,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 16px 32px;
-  font-size: 16px;
+  padding: clamp(12px, 2vh, 16px) clamp(24px, 3vw, 32px);
+  font-size: clamp(14px, 1.5vw, 16px);
   font-weight: 600;
   color: white;
   text-decoration: none;
@@ -158,8 +160,8 @@
 .secondaryBtn {
   display: inline-flex;
   align-items: center;
-  padding: 16px 32px;
-  font-size: 16px;
+  padding: clamp(12px, 2vh, 16px) clamp(24px, 3vw, 32px);
+  font-size: clamp(14px, 1.5vw, 16px);
   font-weight: 500;
   color: var(--text-primary);
   text-decoration: none;
@@ -183,8 +185,8 @@
 .stats {
   display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 24px 40px;
+  gap: clamp(20px, 3vw, 32px);
+  padding: clamp(16px, 2vh, 24px) clamp(24px, 4vw, 40px);
   background: var(--bg-glass);
   border: 1px solid var(--border-color);
   border-radius: 16px;
@@ -192,8 +194,8 @@
 
   @include respond-to(sm) {
     flex-direction: column;
-    gap: 20px;
-    padding: 24px;
+    gap: 16px;
+    padding: 20px;
   }
 }
 
@@ -205,7 +207,7 @@
 }
 
 .statNumber {
-  font-size: 24px;
+  font-size: clamp(20px, 2.5vw, 24px);
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -228,14 +230,14 @@
 
 .scrollIndicator {
   position: absolute;
-  bottom: 40px;
+  bottom: clamp(20px, 4vh, 40px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 
   span {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-secondary);
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -244,7 +246,7 @@
 
 .scrollLine {
   width: 2px;
-  height: 24px;
+  height: clamp(16px, 3vh, 24px);
   background: linear-gradient(to bottom, var(--accent-primary), transparent);
   border-radius: 2px;
 }
