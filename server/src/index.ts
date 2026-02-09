@@ -43,8 +43,8 @@ async function startServer(): Promise<void> {
       console.log(`
   ╔════════════════════════════════════════════╗
   ║                                            ║
-  ║   🌙 NightLog API Server                   ║
-  ║   Running on port ${env.port}                      ║
+  ║   🌙 NightLog API Server                  ║
+  ║   Running on port ${env.port}                       ║
   ║   Environment: ${env.nodeEnv}              ║
   ║                                            ║
   ╚════════════════════════════════════════════╝
