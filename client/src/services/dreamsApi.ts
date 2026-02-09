@@ -80,6 +80,16 @@ export const dreamsApi = api.injectEndpoints({
         const queryString = queryParams.toString();
         return `/dreams${queryString ? `?${queryString}` : ''}`;
       },
+      transformResponse: (response: { success: boolean; data: { dreams: Dream[]; pagination: { page: number; limit: number; total: number; totalPages: number; hasMore: boolean } } }) => ({
+        success: response.success,
+        dreams: response.data.dreams,
+        pagination: {
+          page: response.data.pagination.page,
+          limit: response.data.pagination.limit,
+          total: response.data.pagination.total,
+          pages: response.data.pagination.totalPages,
+        },
+      }),
       providesTags: (result) =>
         result
           ? [
@@ -91,6 +101,10 @@ export const dreamsApi = api.injectEndpoints({
 
     getDream: builder.query<DreamResponse, string>({
       query: (id) => `/dreams/${id}`,
+      transformResponse: (response: { success: boolean; data: { dream: Dream } }) => ({
+        success: response.success,
+        dream: response.data.dream,
+      }),
       providesTags: (_result, _error, id) => [{ type: 'Dreams', id }],
     }),
 
@@ -100,6 +114,10 @@ export const dreamsApi = api.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      transformResponse: (response: { success: boolean; data: { dream: Dream } }) => ({
+        success: response.success,
+        dream: response.data.dream,
+      }),
       invalidatesTags: [{ type: 'Dreams', id: 'LIST' }],
     }),
 
@@ -108,6 +126,10 @@ export const dreamsApi = api.injectEndpoints({
         url: `/dreams/${id}`,
         method: 'PUT',
         body: data,
+      }),
+      transformResponse: (response: { success: boolean; data: { dream: Dream } }) => ({
+        success: response.success,
+        dream: response.data.dream,
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: 'Dreams', id },
@@ -123,8 +145,12 @@ export const dreamsApi = api.injectEndpoints({
       invalidatesTags: [{ type: 'Dreams', id: 'LIST' }],
     }),
 
-    getTrashedDreams: builder.query<DreamsResponse, void>({
+    getTrashedDreams: builder.query<{ success: boolean; dreams: Dream[] }, void>({
       query: () => '/dreams/trash',
+      transformResponse: (response: { success: boolean; data: { dreams: Dream[] } }) => ({
+        success: response.success,
+        dreams: response.data.dreams,
+      }),
       providesTags: [{ type: 'Dreams', id: 'TRASH' }],
     }),
 
@@ -132,6 +158,10 @@ export const dreamsApi = api.injectEndpoints({
       query: (id) => ({
         url: `/dreams/${id}/restore`,
         method: 'POST',
+      }),
+      transformResponse: (response: { success: boolean; data: { dream: Dream } }) => ({
+        success: response.success,
+        dream: response.data.dream,
       }),
       invalidatesTags: [
         { type: 'Dreams', id: 'LIST' },

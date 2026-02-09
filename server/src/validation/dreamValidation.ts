@@ -13,9 +13,8 @@ export const createDreamSchema = z.object({
     .trim(),
   date: z
     .string()
-    .datetime()
-    .optional()
-    .default(() => new Date().toISOString()),
+    .refine((val) => !isNaN(Date.parse(val)), 'Invalid date format')
+    .optional(),
   tags: z
     .array(z.string().max(50))
     .max(10, 'Maximum 10 tags allowed')

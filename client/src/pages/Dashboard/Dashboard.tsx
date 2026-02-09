@@ -82,7 +82,11 @@ export default function Dashboard() {
         <div className={styles.userSection}>
           <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
             <span className={styles.avatar}>
-              {user?.username?.charAt(0).toUpperCase()}
+              {user?.avatar ? (
+                <img src={user.avatar} alt={user.username} />
+              ) : (
+                user?.username?.charAt(0).toUpperCase()
+              )}
             </span>
             <span className={styles.greeting}>{user?.username}</span>
           </button>
