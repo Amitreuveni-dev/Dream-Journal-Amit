@@ -67,6 +67,10 @@ export default function Dashboard() {
     setViewingDream(null);
   };
 
+  const handleDreamUpdate = (updatedDream: Dream) => {
+    setViewingDream(updatedDream);
+  };
+
   return (
     <motion.div
       className={styles.dashboard}
@@ -136,6 +140,7 @@ export default function Dashboard() {
         onClose={handleCloseDetail}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onDreamUpdate={handleDreamUpdate}
       />
     </motion.div>
   );

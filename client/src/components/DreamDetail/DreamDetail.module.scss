@@ -239,6 +239,86 @@
   }
 }
 
+.analyzeBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.analysisLoading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loadingPulse {
+  height: 14px;
+  background: var(--bg-glass);
+  border-radius: 6px;
+  animation: pulse 1.5s ease-in-out infinite;
+
+  &:nth-child(1) { width: 100%; }
+  &:nth-child(2) { width: 85%; }
+  &:nth-child(3) { width: 60%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.analysisMood {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.analysisMoodLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.analysisMoodValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
 .editBtn {
   display: flex;
   align-items: center;

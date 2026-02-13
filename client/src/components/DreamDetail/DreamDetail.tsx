@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
 import { Dream } from '../../services/dreamsApi';
+import { useAnalyzeDreamMutation, useReanalyzeDreamMutation } from '../../services';
 import { MoodType } from '../../validation/dreamSchemas';
 import styles from './DreamDetail.module.scss';
 
@@ -9,6 +11,7 @@ interface DreamDetailProps {
   onClose: () => void;
   onEdit: (dream: Dream) => void;
   onDelete: (id: string) => void;
+  onDreamUpdate?: (dream: Dream) => void;
 }
 
 const moodEmojis: Record<MoodType, string> = {
@@ -22,8 +25,28 @@ const moodEmojis: Record<MoodType, string> = {
   neutral: '😐',
 };
 
-export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete }: DreamDetailProps) {
+export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete, onDreamUpdate }: DreamDetailProps) {
+  const [analyzeDream, { isLoading: isAnalyzing }] = useAnalyzeDreamMutation();
+  const [reanalyzeDream, { isLoading: isReanalyzing }] = useReanalyzeDreamMutation();
+
+  const isProcessing = isAnalyzing || isReanalyzing;
+
   if (!dream) return null;
+
+  const handleAnalyze = async () => {
+    try {
+      const isReanalyze = !!dream.analysis;
+      const result = isReanalyze
+        ? await reanalyzeDream(dream._id).unwrap()
+        : await analyzeDream(dream._id).unwrap();
+
+      toast.success(result.message || 'Dream analyzed successfully');
+      onDreamUpdate?.(result.data.dream);
+    } catch (error: unknown) {
+      const err = error as { data?: { message?: string } };
+      toast.error(err.data?.message || 'Failed to analyze dream');
+    }
+  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -116,9 +139,30 @@ export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete }
                   )}
                 </div>
 
-                {dream.analysis && (
+                {isProcessing && (
+                  <div className={styles.section}>
+                    <h4 className={styles.sectionTitle}>
+                      {dream.analysis ? 'Re-analyzing...' : 'Analyzing...'}
+                    </h4>
+                    <div className={styles.analysisLoading}>
+                      <div className={styles.loadingPulse} />
+                      <div className={styles.loadingPulse} />
+                      <div className={styles.loadingPulse} />
+                    </div>
+                  </div>
+                )}
+
+                {!isProcessing && dream.analysis && (
                   <div className={styles.section}>
                     <h4 className={styles.sectionTitle}>AI Analysis</h4>
+                    {dream.analysis.mood && (
+                      <div className={styles.analysisMood}>
+                        <span className={styles.analysisMoodLabel}>Detected Mood:</span>
+                        <span className={styles.analysisMoodValue}>
+                          {moodEmojis[dream.analysis.mood as MoodType] || '🔮'} {dream.analysis.mood}
+                        </span>
+                      </div>
+                    )}
                     {dream.analysis.interpretation && (
                       <p className={styles.interpretation}>{dream.analysis.interpretation}</p>
                     )}
@@ -148,6 +192,27 @@ export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete }
                   <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                 </svg>
                 Delete
+              </button>
+              <button
+                className={styles.analyzeBtn}
+                onClick={handleAnalyze}
+                disabled={isProcessing}
+              >
+                {isProcessing ? (
+                  <>
+                    <svg className={styles.spinner} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    {dream.analysis ? 'Re-analyzing...' : 'Analyzing...'}
+                  </>
+                ) : (
+                  <>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7L2 9.4h7.6L12 2z" />
+                    </svg>
+                    {dream.analysis ? 'Re-analyze' : 'Analyze Dream'}
+                  </>
+                )}
               </button>
               <button
                 className={styles.editBtn}

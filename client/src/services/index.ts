@@ -60,3 +60,13 @@ export type {
   SymbolData,
   SymbolsResponse,
 } from './insightsApi';
+
+export {
+  analysisApi,
+  useAnalyzeDreamMutation,
+  useReanalyzeDreamMutation,
+} from './analysisApi';
+export type {
+  AnalysisResult,
+  AnalyzeDreamResponse,
+} from './analysisApi';
