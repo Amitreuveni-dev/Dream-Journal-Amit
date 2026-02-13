@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useAppSelector } from '../../redux/store';
 import styles from './Navbar.module.scss';
 
 export default function Navbar() {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
 
@@ -52,12 +54,20 @@ export default function Navbar() {
         </div>
 
         <div className={styles.authButtons}>
-          <Link to="/login" className={styles.loginBtn}>
-            Log In
-          </Link>
-          <Link to="/register" className={styles.signupBtn}>
-            Get Started
-          </Link>
+          {isAuthenticated ? (
+            <Link to="/dashboard" className={styles.signupBtn}>
+              My Dreams
+            </Link>
+          ) : (
+            <>
+              <Link to="/login" className={styles.loginBtn}>
+                Log In
+              </Link>
+              <Link to="/register" className={styles.signupBtn}>
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </motion.nav>
