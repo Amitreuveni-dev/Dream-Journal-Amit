@@ -40,15 +40,7 @@ async function startServer(): Promise<void> {
     await connectToDatabase();
 
     app.listen(env.port, () => {
-      console.log(`
-  ╔════════════════════════════════════════════╗
-  ║                                            ║
-  ║   🌙 NightLog API Server                  ║
-  ║   Running on port ${env.port}                       ║
-  ║   Environment: ${env.nodeEnv}              ║
-  ║                                            ║
-  ╚════════════════════════════════════════════╝
-      `);
+      console.log(`🌙 NightLog API Server running on port ${env.port} [${env.nodeEnv}]`);
     });
   } catch (error) {
     console.error('Failed to start server:', error);

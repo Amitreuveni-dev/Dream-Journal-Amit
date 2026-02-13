@@ -48,7 +48,7 @@ NightLog is a full-stack dream journaling application that combines the power of
 - [x] Authentication system (register/login/logout)
 - [x] JWT middleware & protected routes
 - [x] Dream CRUD routes with soft delete
-- [ ] AI analysis integration
+- [x] AI analysis integration (Google Gemini)
 - [x] Email service (Nodemailer)
 - [x] Cloudinary avatar upload
 - [x] Insights/statistics endpoints
