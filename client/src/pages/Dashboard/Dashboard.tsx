@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAppSelector } from '../../redux/store';
@@ -20,8 +20,22 @@ export default function Dashboard() {
   const [editingDream, setEditingDream] = useState<Dream | null>(null);
   const [viewingDream, setViewingDream] = useState<Dream | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleLogout = async () => {
+    setIsMenuOpen(false);
     try {
       await logout().unwrap();
       toast.success('Logged out successfully');
@@ -29,6 +43,11 @@ export default function Dashboard() {
     } catch {
       toast.error('Logout failed');
     }
+  };
+
+  const handleNavigate = (path: string) => {
+    setIsMenuOpen(false);
+    navigate(path);
   };
 
   const handleCreateNew = () => {
@@ -79,50 +98,90 @@ export default function Dashboard() {
       transition={{ duration: 0.5 }}
     >
       <header className={styles.header}>
-        <div className={styles.logo}>
+        <div className={styles.headerLeft}>
           <span className={styles.logoIcon}>🌙</span>
           <span className={styles.logoText}>NightLog</span>
         </div>
-        <div className={styles.userSection}>
-          <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
-            <span className={styles.avatar}>
-              {user?.avatar ? (
-                <img src={user.avatar} alt={user.username} />
-              ) : (
-                user?.username?.charAt(0).toUpperCase()
-              )}
-            </span>
-            <span className={styles.greeting}>{user?.username}</span>
-          </button>
-          <ThemeToggle />
-          <button className={styles.homeBtn} onClick={() => navigate('/')}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            Home
-          </button>
-          <button className={styles.insightsBtn} onClick={() => navigate('/insights')}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 3v18h18" />
-              <path d="M18 9l-5 5-4-4-6 6" />
-            </svg>
-            Insights
-          </button>
-          <button className={styles.trashBtn} onClick={() => navigate('/trash')}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>
-            Trash
-          </button>
+
+        <div className={styles.headerRight} ref={menuRef}>
           <button
-            className={styles.logoutBtn}
-            onClick={handleLogout}
-            disabled={isLoggingOut}
+            className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerOpen : ''}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isLoggingOut ? 'Logging out...' : 'Logout'}
+            <span />
+            <span />
+            <span />
           </button>
+
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                className={styles.dropdown}
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.15 }}
+              >
+                <button className={styles.menuItem} onClick={() => handleNavigate('/profile')}>
+                  <span className={styles.menuAvatar}>
+                    {user?.avatar ? (
+                      <img src={user.avatar} alt={user.username} />
+                    ) : (
+                      user?.username?.charAt(0).toUpperCase()
+                    )}
+                  </span>
+                  <span>{user?.username}</span>
+                </button>
+
+                <div className={styles.menuDivider} />
+
+                <button className={styles.menuItem} onClick={() => handleNavigate('/')}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                  <span>Home</span>
+                </button>
+
+                <button className={styles.menuItem} onClick={() => handleNavigate('/insights')}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 3v18h18" />
+                    <path d="M18 9l-5 5-4-4-6 6" />
+                  </svg>
+                  <span>Insights</span>
+                </button>
+
+                <button className={styles.menuItem} onClick={() => handleNavigate('/trash')}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="3 6 5 6 21 6" />
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  </svg>
+                  <span>Trash</span>
+                </button>
+
+                <div className={styles.menuThemeRow}>
+                  <span>Theme</span>
+                  <ThemeToggle />
+                </div>
+
+                <div className={styles.menuDivider} />
+
+                <button
+                  className={`${styles.menuItem} ${styles.menuLogout}`}
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                  <span>{isLoggingOut ? 'Logging out...' : 'Logout'}</span>
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </header>
 
