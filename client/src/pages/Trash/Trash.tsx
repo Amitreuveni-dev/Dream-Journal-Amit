@@ -8,9 +8,9 @@ import {
   usePermanentDeleteDreamMutation,
   Dream,
 } from '../../services';
-import DreamDetail from '../../components/DreamDetail';
-import ThemeToggle from '../../components/ThemeToggle';
-import { TrashCardSkeleton } from '../../components/Skeleton';
+import DreamDetail from '../../components/DreamDetail/DreamDetail';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
+import { TrashCardSkeleton } from '../../components/Skeleton/Skeleton';
 import styles from './Trash.module.scss';
 
 const moodEmojis: Record<string, string> = {

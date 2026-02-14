@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import ProtectedRoute from './components/ProtectedRoute';
-import Landing from './pages/Landing';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import Trash from './pages/Trash';
-import Profile from './pages/Profile';
-import Insights from './pages/Insights';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Landing from './pages/Landing/Landing';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Trash from './pages/Trash/Trash';
+import Profile from './pages/Profile/Profile';
+import Insights from './pages/Insights/Insights';
 
 function App() {
   return (

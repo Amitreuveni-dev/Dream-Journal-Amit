@@ -13,12 +13,12 @@ import {
   useDeleteAccountMutation,
 } from '../../services';
 import { useTheme } from '../../contexts/ThemeContext';
-import ThemeToggle from '../../components/ThemeToggle';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
 import {
   ProfileSectionSkeleton,
   PreferencesSectionSkeleton,
   SecuritySectionSkeleton,
-} from '../../components/Skeleton';
+} from '../../components/Skeleton/Skeleton';
 import styles from './Profile.module.scss';
 
 const profileSchema = z.object({

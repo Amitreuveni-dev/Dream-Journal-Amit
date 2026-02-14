@@ -22,8 +22,8 @@ import {
   useGetSymbolFrequencyQuery,
   InsightsQueryParams,
 } from '../../services';
-import ThemeToggle from '../../components/ThemeToggle';
-import { StatCardSkeleton, ChartCardSkeleton } from '../../components/Skeleton';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
+import { StatCardSkeleton, ChartCardSkeleton } from '../../components/Skeleton/Skeleton';
 import styles from './Insights.module.scss';
 
 type Period = '7d' | '30d' | '90d' | '1y' | 'all';

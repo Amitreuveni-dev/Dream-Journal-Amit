@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dream, DreamsQueryParams, useGetDreamsQuery } from '../../services';
 import { moodOptions, MoodType } from '../../validation/dreamSchemas';
-import DreamCard from '../DreamCard';
-import { DreamCardSkeleton } from '../Skeleton';
+import DreamCard from '../DreamCard/DreamCard';
+import { DreamCardSkeleton } from '../Skeleton/Skeleton';
 import styles from './DreamList.module.scss';
 
 interface DreamListProps {
