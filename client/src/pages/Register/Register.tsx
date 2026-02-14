@@ -1,18 +1,24 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { registerSchema, RegisterFormData } from '../../validation/authSchemas';
 import { useRegisterMutation } from '../../services';
+import { useAppSelector } from '../../redux/store';
 import styles from './Register.module.scss';
 
 export default function Register() {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const [registerUser, { isLoading }] = useRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   const {
     register,

@@ -1,17 +1,23 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { loginSchema, LoginFormData } from '../../validation/authSchemas';
 import { useLoginMutation } from '../../services';
+import { useAppSelector } from '../../redux/store';
 import styles from './Login.module.scss';
 
 export default function Login() {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   const {
     register,

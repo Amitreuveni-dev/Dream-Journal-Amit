@@ -1,9 +1,11 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useAppSelector } from '../../redux/store';
 import styles from './CallToAction.module.scss';
 
 export default function CallToAction() {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -42,8 +44,8 @@ export default function CallToAction() {
           </p>
 
           <div className={styles.buttons}>
-            <Link to="/register" className={styles.primaryBtn}>
-              Start Your Journey
+            <Link to={isAuthenticated ? '/dashboard' : '/register'} className={styles.primaryBtn}>
+              {isAuthenticated ? 'Go to Dashboard' : 'Start Your Journey'}
               <svg
                 width="16"
                 height="16"

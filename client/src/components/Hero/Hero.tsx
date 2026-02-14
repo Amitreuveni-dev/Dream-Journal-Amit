@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useAppSelector } from '../../redux/store';
 import styles from './Hero.module.scss';
 
 export default function Hero() {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const { scrollYProgress } = useScroll();
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -67,8 +69,8 @@ export default function Hero() {
         </motion.p>
 
         <motion.div className={styles.ctaButtons} variants={itemVariants}>
-          <Link to="/register" className={styles.primaryBtn}>
-            Start Free
+          <Link to={isAuthenticated ? '/dashboard' : '/register'} className={styles.primaryBtn}>
+            {isAuthenticated ? 'My Dreams' : 'Start Free'}
             <svg
               width="16"
               height="16"
