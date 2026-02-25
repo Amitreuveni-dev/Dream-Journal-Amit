@@ -8,8 +8,8 @@ export interface JwtPayload {
 
 export function generateToken(payload: JwtPayload): string {
   return jwt.sign(payload, env.jwtSecret, {
-    expiresIn: env.jwtExpiresIn,
-  });
+    expiresIn: env.jwtExpiresIn as string,
+  } as jwt.SignOptions);
 }
 
 export function verifyToken(token: string): JwtPayload {

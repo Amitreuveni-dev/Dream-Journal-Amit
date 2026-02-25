@@ -127,7 +127,7 @@ const dreamSchema = new Schema<IDreamDocument, IDreamModel>(
     timestamps: true,
     toJSON: {
       transform(_doc, ret) {
-        delete ret.__v;
+        delete (ret as Record<string, unknown>).__v;
         return ret;
       },
     },
