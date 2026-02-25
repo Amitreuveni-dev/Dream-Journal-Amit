@@ -15,11 +15,6 @@ export default function Register() {
   const [registerUser, { isLoading }] = useRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
   const {
     register,
     handleSubmit,
@@ -27,6 +22,10 @@ export default function Register() {
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
