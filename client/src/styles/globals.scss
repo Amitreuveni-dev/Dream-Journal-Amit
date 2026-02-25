@@ -232,3 +232,18 @@ a {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
+
+// High Contrast Mode
+[data-high-contrast] {
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --border-color: rgba(255, 255, 255, 0.3);
+  --bg-glass: rgba(255, 255, 255, 0.1);
+}
+
+[data-high-contrast][data-theme='light'] {
+  --text-primary: #000000;
+  --text-secondary: #1e293b;
+  --border-color: rgba(0, 0, 0, 0.4);
+  --bg-glass: rgba(0, 0, 0, 0.07);
+}

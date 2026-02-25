@@ -7,10 +7,26 @@
   right: 0;
   z-index: 1000;
   padding: 16px 0;
-  transition: all 0.3s ease;
+  background: rgba(12, 12, 22, 0.70);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &.scrolled {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom-color: rgba(255, 255, 255, 0.13);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// Light mode
+:global([data-theme='light']) .navbar {
+  background: rgba(248, 250, 252, 0.82);
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+
+  &.scrolled {
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.07);
   }
 }
 
@@ -136,12 +152,12 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  width: 200px;
+  width: 220px;
   padding: 8px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
   z-index: 1100;
 }
 
@@ -178,12 +194,88 @@
   }
 }
 
+.menuItemActive {
+  color: var(--accent-primary);
+
+  svg {
+    color: var(--accent-primary);
+  }
+
+  &:hover {
+    background: rgba(99, 102, 241, 0.15);
+  }
+}
+
 .menuDivider {
   height: 1px;
   margin: 6px 12px;
   background: var(--border-color);
 }
 
+// Font size section
+.menuSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+}
+
+.menuLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.fontControls {
+  display: flex;
+  gap: 6px;
+}
+
+.fontBtn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 9px;
+  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.07);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1;
+
+  svg {
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  &:hover:not(:disabled) {
+    background: rgba(99, 102, 241, 0.18);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+
+    svg {
+      color: var(--accent-primary);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.fontSmall {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fontLarge {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+// Auth buttons
 .loginBtn {
   padding: 10px 20px;
   font-size: 14px;
@@ -212,6 +304,8 @@
   transition: all 0.2s ease;
 
   &:hover {
-    filter: brightness(0.88);
+    color: white;
+    filter: brightness(0.92);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
   }
 }

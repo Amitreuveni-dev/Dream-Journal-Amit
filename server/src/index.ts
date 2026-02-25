@@ -10,7 +10,15 @@ const app: Application = express();
 
 // Middleware
 app.use(cors({
-  origin: env.clientUrl,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, mobile apps)
+    if (!origin) return callback(null, true);
+    // Allow configured client URL
+    if (origin === env.clientUrl) return callback(null, true);
+    // Allow any localhost port for local development
+    if (/^http:\/\/localhost:\d+$/.test(origin)) return callback(null, true);
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
