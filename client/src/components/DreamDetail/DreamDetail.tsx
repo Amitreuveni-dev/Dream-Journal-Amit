@@ -33,7 +33,7 @@ export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete, 
 
   if (!dream) return null;
 
-  const handleAnalyze = async () => {
+  const _handleAnalyze = async () => {
     try {
       const isReanalyze = !!dream.analysis;
       const result = isReanalyze
