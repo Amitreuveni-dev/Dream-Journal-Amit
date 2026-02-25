@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import toast from 'react-hot-toast';
 import { Dream } from '../../services/dreamsApi';
 import { useAnalyzeDreamMutation, useReanalyzeDreamMutation } from '../../services';
 import { MoodType } from '../../validation/dreamSchemas';
@@ -25,28 +24,13 @@ const moodEmojis: Record<MoodType, string> = {
   neutral: '😐',
 };
 
-export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete, onDreamUpdate }: DreamDetailProps) {
-  const [analyzeDream, { isLoading: isAnalyzing }] = useAnalyzeDreamMutation();
-  const [reanalyzeDream, { isLoading: isReanalyzing }] = useReanalyzeDreamMutation();
+export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete }: DreamDetailProps) {
+  const [, { isLoading: isAnalyzing }] = useAnalyzeDreamMutation();
+  const [, { isLoading: isReanalyzing }] = useReanalyzeDreamMutation();
 
   const isProcessing = isAnalyzing || isReanalyzing;
 
   if (!dream) return null;
-
-  const _handleAnalyze = async () => {
-    try {
-      const isReanalyze = !!dream.analysis;
-      const result = isReanalyze
-        ? await reanalyzeDream(dream._id).unwrap()
-        : await analyzeDream(dream._id).unwrap();
-
-      toast.success(result.message || 'Dream analyzed successfully');
-      onDreamUpdate?.(result.data.dream);
-    } catch (error: unknown) {
-      const err = error as { data?: { message?: string } };
-      toast.error(err.data?.message || 'Failed to analyze dream');
-    }
-  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
