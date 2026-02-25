@@ -195,24 +195,13 @@ export default function DreamDetail({ dream, isOpen, onClose, onEdit, onDelete, 
               </button>
               <button
                 className={styles.analyzeBtn}
-                onClick={handleAnalyze}
-                disabled={isProcessing}
+                disabled
+                title="AI analysis — coming soon"
               >
-                {isProcessing ? (
-                  <>
-                    <svg className={styles.spinner} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    {dream.analysis ? 'Re-analyzing...' : 'Analyzing...'}
-                  </>
-                ) : (
-                  <>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7L2 9.4h7.6L12 2z" />
-                    </svg>
-                    {dream.analysis ? 'Re-analyze' : 'Analyze Dream'}
-                  </>
-                )}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7L2 9.4h7.6L12 2z" />
+                </svg>
+                Feature in Progress
               </button>
               <button
                 className={styles.editBtn}

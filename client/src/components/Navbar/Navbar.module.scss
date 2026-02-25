@@ -76,6 +76,114 @@
   gap: 12px;
 }
 
+.menuWrapper {
+  position: relative;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-secondary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    border-color: var(--accent-primary);
+
+    span {
+      background: var(--text-primary);
+    }
+  }
+}
+
+.hamburgerOpen {
+  border-color: var(--accent-primary);
+
+  span {
+    background: var(--accent-primary);
+  }
+
+  span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  span:nth-child(2) {
+    opacity: 0;
+  }
+
+  span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 200px;
+  padding: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  z-index: 1100;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+  }
+
+  &:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--text-primary);
+
+    svg {
+      color: var(--accent-primary);
+    }
+  }
+}
+
+.menuDivider {
+  height: 1px;
+  margin: 6px 12px;
+  background: var(--border-color);
+}
+
 .loginBtn {
   padding: 10px 20px;
   font-size: 14px;
@@ -104,7 +212,6 @@
   transition: all 0.2s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+    filter: brightness(1.12);
   }
 }

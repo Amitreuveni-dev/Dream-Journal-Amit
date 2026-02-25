@@ -302,6 +302,25 @@ $text-primary: #1e293b;
 $text-secondary: #64748b;
 ```
 
+### Borders & Radius
+
+```scss
+// Border colors
+$dark-border-color: rgba(255, 255, 255, 0.1);
+$light-border-color: rgba(0, 0, 0, 0.1);
+
+// CSS custom properties
+--border-color: #{$dark-border-color};   // dark mode
+--border-color: #{$light-border-color};  // light mode
+
+// Border radius scale
+--radius-sm:   4px;
+--radius-md:   8px;
+--radius-lg:   12px;
+--radius-xl:   16px;
+--radius-full: 9999px;
+```
+
 ---
 
 ## 🔧 Scripts
