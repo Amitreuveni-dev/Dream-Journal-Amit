@@ -6,6 +6,40 @@ NightLog is a full-stack dream journaling application that combines the power of
 
 ---
 
+## 📝 Changelog / Session Notes
+
+> Use this section to track what has been done so Claude always has context.
+
+### Session — 2026-02-25
+
+**UI Fixes & Features:**
+
+1. **AI Analyze button disabled** (`DreamDetail.tsx`)
+   - Button now shows "Feature in Progress" and is permanently `disabled`
+   - Tooltip: "AI analysis — coming soon"
+   - All AI files are intact (server `aiService.ts`, `analysisController.ts`, `analysisRoutes.ts`) — ready to re-enable
+
+2. **Hamburger menu added to landing page Navbar** (`Navbar.tsx`, `Navbar.module.scss`)
+   - Same hamburger pattern as Dashboard
+   - Dropdown contains: Theme toggle, Features link, How It Works link
+   - Closes on click-outside
+
+3. **Dark theme button hover fixed** (multiple SCSS files)
+   - Replaced `transform: translateY + box-shadow glow` with `filter: brightness(1.12)` on all gradient buttons
+   - Files changed: `globals.scss`, `Hero.module.scss`, `Navbar.module.scss`, `DreamDetail.module.scss`, `DreamList.module.scss`
+
+4. **"How It Works" anchor fixed** (`CallToAction.tsx`)
+   - Added `id="how-it-works"` to the CallToAction section
+   - The ID was missing — both Navbar and hamburger links now scroll correctly
+
+**README:**
+- Added Borders & Radius section to Design System
+- Added this Changelog section
+
+**Deployment:** Netlify (frontend) + Render (backend). Push to `main` → auto-deploys.
+
+---
+
 ## ✨ Features
 
 ### Core Functionality

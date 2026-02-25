@@ -16,7 +16,7 @@ export default function CallToAction() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={sectionRef} className={styles.cta}>
+    <section ref={sectionRef} id="how-it-works" className={styles.cta}>
       {/* Background gradient */}
       <div className={styles.background}>
         <motion.div className={styles.gradientOrb} style={{ y }} />
