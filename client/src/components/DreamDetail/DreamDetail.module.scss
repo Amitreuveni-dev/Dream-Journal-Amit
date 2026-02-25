@@ -259,7 +259,7 @@
   }
 
   &:hover:not(:disabled) {
-    filter: brightness(1.12);
+    filter: brightness(0.88);
   }
 
   &:disabled {
@@ -339,6 +339,6 @@
   }
 
   &:hover {
-    filter: brightness(1.12);
+    filter: brightness(0.88);
   }
 }
